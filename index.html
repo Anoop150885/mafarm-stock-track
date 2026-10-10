@@ -41,3 +41,23 @@ document.getElementById('analyzeFilesBtn').addEventListener('click',async()=>{co
 setReportPeriod('day');['reportFrom','reportTo','reportBranch'].forEach(id=>document.getElementById(id).addEventListener('change',applyReportFilters));render();
 </script></body></html>
  <!-- MAFARM StockTrack deployment update -->
+# MAFARM StockTrack — Document-wise Reports & Reversible Removal
+
+## Included changes
+- Every manual stock-taking form is saved as an individual document with a reference ID.
+- Every imported Excel/CSV file is retained as its own separate document, including multiple files for the same branch and date.
+- Reports list document ID, date, branch, entry type, assistant/source filename, item count, stock value, corrections, net correction and status.
+- View opens a document-level summary.
+- Remove deletes only the selected document.
+- Clear branch data removes all documents for the selected branch across all dates and entry types after confirmation.
+- Undo last removal restores the most recent removed document or branch-clear batch in this browser.
+- Undo history is retained in browser local storage (up to the last 20 removal actions).
+
+## Publish to GitHub Pages
+1. Download and extract the ZIP.
+2. Open the repository's `index.html` on GitHub and choose Edit, or replace the file using Add file > Upload files.
+3. Replace the old HTML with this `index.html` content/file and commit to `main`.
+4. Wait for the GitHub Actions Pages deployment to succeed, then hard-refresh the site (Ctrl+F5).
+
+## Important limitations
+This is still a static, browser-local prototype. Records and undo history exist only in the browser/profile where they were created; clearing browser storage or using another computer will not share/restore them. Before using destructive controls for official company data, connect a shared backend/database and authentication with server-side audit logging and backup. Undo here is a local reversible deletion, not a permanent database recovery mechanism.
